@@ -6,10 +6,11 @@ Set up bind forwards
 
 Arguments:
  *$forwarders*:  List of IP addresses to forward DNS resolution to
+ *$recursives*:  List of IP CIDR netblocks to allow recursive resolution for
 
 
 */
-define bind::forwarders($forwarders=false) {
+define bind::options($forwarders=false, $recursives=false) {
     file {"/etc/bind/named.conf.options":
       ensure => file,
       owner => root,
