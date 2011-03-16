@@ -20,8 +20,8 @@ class bind::base {
 
   file {["/var/lib/bind/",]:
     ensure => directory,
-    owner  => root,
-    group  => root,
+    owner  => bind,
+    group  => bind,
     mode   => 0755,
     require => Package["bind9"],
     purge   => true,
