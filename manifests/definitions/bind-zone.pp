@@ -32,15 +32,15 @@ define bind::zone($ensure=present,
 
   common::concatfilepart {"bind.zones.${name}":
     ensure => $ensure,
+    file   => "/var/lib/bind/${name}.conf",
     notify => Service["bind9"],
-    file   => "/etc/bind/zones/${name}.conf",
   }
 
   common::concatfilepart {"named.local.zone.${name}":
     ensure  => $ensure,
-    notify  => Service["bind9"],
     file    => "/etc/bind/named.conf.local",
-    content => "include \"/etc/bind/zones/${name}.conf\";\n",
+    content => "include \"/var/lib/bind/${name}.conf\";\n",
+    notify => Service["bind9"],
   }
 
   if $is_slave {
@@ -71,8 +71,9 @@ define bind::zone($ensure=present,
 
     common::concatfilepart {"bind.00.${name}":
       ensure => $ensure,
-      file   => "/etc/bind/pri/${name}.conf",
+      file   => "/var/lib/bind/${name}.zone",
       content => template("bind/zone-header.erb"),
+      notify => Service["bind9"],
     }
   }
 }

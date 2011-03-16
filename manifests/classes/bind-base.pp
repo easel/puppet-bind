@@ -18,7 +18,7 @@ class bind::base {
     require => Package["bind9"],
   }
 
-  file {["/etc/bind/pri", "/etc/bind/zones"]:
+  file {["/var/lib/bind/",]:
     ensure => directory,
     owner  => root,
     group  => root,

@@ -6,9 +6,5 @@ Special debian class - inherits from bind::base
 You should not include this class - please refer to Class["bind"]
 
 */
-class bind::ubuntu inherits bind::base {
-  Service["bind9"] {
-    pattern => "/usr/sbin/named",
-    restart => "/etc/init.d/bind9 reload",
-  }
+class bind::ubuntu inherits bind::debian {
 }

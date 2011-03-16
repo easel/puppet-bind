@@ -8,11 +8,12 @@ options {
 	<% if forwarders -%>
 	forwarders {
 		<% if forwarders.is_a?(Array) -%>
-		<%= forwarders.join(';\n') -%>; 
+		<%= forwarders.join('; ') -%>; 
 		<% else -%>
 		<%= forwarders %>;
 		<% end -%>
-	}
+	};
+	forward first;
 	<% end -%>
 
 	auth-nxdomain no;    # conform to RFC1035

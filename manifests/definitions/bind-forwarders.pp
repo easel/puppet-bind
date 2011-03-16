@@ -16,5 +16,6 @@ define bind::forwarders($forwarders=false) {
       group => root,
       mode => 0755,
       content => template("bind/named.conf.options.erb"),
+      notify => Service["bind9"],
     }
 }
