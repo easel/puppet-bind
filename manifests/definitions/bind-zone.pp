@@ -29,12 +29,15 @@ define bind::zone($ensure=present,
     $zone_xfers=false,
     $zone_updates="none",
     $zone_masters=false) {
+        
+  
 
   file { "/var/lib/bind/${name}.zone":
      ensure => $ensure,
      owner => "bind", 
      group => "bind",
      mode => 640,
+     notify => Service["bind9"],
   }
 
   common::concatfilepart {"bind.zones.${name}":
