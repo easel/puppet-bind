@@ -1,0 +1,20 @@
+options {
+	directory "/var/cache/bind";
+
+	// If there is a firewall between you and nameservers you want
+	// to talk to, you may need to fix the firewall to allow multiple
+	// ports to talk.  See http://www.kb.cert.org/vuls/id/800113
+
+	<% if forwarders -%>
+	forwarders {
+		<% if forwarders.is_a?(Array) -%>
+		<%= forwarders.join(';\n') -%>; 
+		<% else -%>
+		<%= forwarders %>;
+		<% end -%>
+	}
+	<% end -%>
+
+	auth-nxdomain no;    # conform to RFC1035
+	listen-on-v6 { any; };
+};
