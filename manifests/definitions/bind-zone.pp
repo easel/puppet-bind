@@ -13,6 +13,7 @@ Arguments:
   *$zone_expiracy*:     Time period. Slave expiracy time (master only)
   *$zone_ns*:           Valid NS for this zone (master only)
   *$zone_xfers*:        IPs. Valid xfers for zone (master only)
+  *$zone_updates*:      Allow DDNS updates? none, any or key {keyname} (master only)
   *$zone_masters*:      IPs. Valid master for this zone (slave only)
 
 */
@@ -26,6 +27,7 @@ define bind::zone($ensure=present,
     $zone_expiracy="1w",
     $zone_ns=false,
     $zone_xfers=false,
+    $zone_updates="none",
     $zone_masters=false) {
 
   common::concatfilepart {"bind.zones.${name}":

@@ -11,6 +11,7 @@ zone "<%=name%>" IN {
 <% else -%>
   allow-transfer { none; };
 <% end -%>
+  allow-update { <%= zone_updates %>; };
   allow-query { any; };
   notify yes;
 };
