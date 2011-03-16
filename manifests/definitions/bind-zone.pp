@@ -30,6 +30,13 @@ define bind::zone($ensure=present,
     $zone_updates="none",
     $zone_masters=false) {
 
+  file { "/var/lib/bind/${name}.zone":
+     ensure => $ensure,
+     owner => "bind", 
+     group => "bind",
+     mode => 640,
+  }
+
   common::concatfilepart {"bind.zones.${name}":
     ensure => $ensure,
     file   => "/var/lib/bind/${name}.conf",
@@ -71,9 +78,6 @@ define bind::zone($ensure=present,
 
     common::concatfilepart {"bind.00.${name}":
       ensure => $ensure,
-      owner => "bind",
-      group => "bind",
-      mode => 640,
       file   => "/var/lib/bind/${name}.zone",
       content => template("bind/zone-header.erb"),
       notify => Service["bind9"],
