@@ -50,6 +50,8 @@ class bind {
   case $operatingsystem {
     "Debian": { include bind::debian }
     "Ubuntu": { include bind::ubuntu }
+    "CentOS": { include bind::redhat }
+    "RedHat": { include bind::redhat }
     default: { fail "Unknown $operatingsystem" }
   }
 }

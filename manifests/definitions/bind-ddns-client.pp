@@ -11,7 +11,7 @@ define bind::ddns-client(
 {
 
     case $operatingsystem {
-        "Ubuntu": { 
+        "Debian","Ubuntu": { 
             file { "/etc/network/if-up.d/ddns-register.sh":
                 ensure => file,
                 owner => root,
@@ -19,6 +19,15 @@ define bind::ddns-client(
                 mode => 0700,
                 content => template("bind/ddns-register.sh.erb"),
             }            
+        }
+        "centos", "RedHat": {
+            file { "/sbin/ifup-local":
+                ensure => file,
+                owner => root,
+                group => root,
+                mode => 0700,
+                content => template("bind/ddns-register.sh.erb"),
+            }
         }
         default: { fail "Unknown $operatingsystem" }
     }
