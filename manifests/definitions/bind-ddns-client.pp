@@ -20,7 +20,7 @@ define bind::ddns-client(
                 content => template("bind/ddns-register.sh.erb"),
             }            
         }
-        "centos", "RedHat": {
+        "CentOS", "RedHat": {
             file { "/sbin/ifup-local":
                 ensure => file,
                 owner => root,
